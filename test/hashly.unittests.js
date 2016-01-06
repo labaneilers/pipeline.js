@@ -266,6 +266,7 @@ describe("hashly", function() {
             var _fsutil = rewire("../lib/file-system-util");
             var options = {
                 manifestFormat: "json",
+                logger: console.log,
                 sourcemapURLPrefix: "https://s3-us-west-2.amazonaws.com/vistacore-testing-bucket/dir"
             };
             _fsutil.writeFileSync = function(file, data) {
