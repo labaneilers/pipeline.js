@@ -269,15 +269,18 @@ describe("hashly", function() {
                 sourcemapURLPrefix: "https://s3-us-west-2.amazonaws.com/vistacore-testing-bucket/dir"
             };
             _fsutil.writeFileSync = function(file, data) {
-                if(file.indexOf("test\\fixtures\\aggregated_min-hc") > 0){
+                if(file.indexOf("test\\fixtures\\aggregated_min-hc") > -1){
+                    console.log(file, data.match("https://s3-us-west-2.amazonaws.com/vistacore-testing-bucket/dir/test/fixtures/aggregated_min.js-") !== null );
                     assert.isTrue(data.match("https://s3-us-west-2.amazonaws.com/vistacore-testing-bucket/dir/test/fixtures/aggregated_min.js-") !== null );
                 }
             };
             hashly.__set__("fsutil", _fsutil);
+            console.log("test");
             var exitCode = hashly.processFiles(["./test/fixtures/aggregated_min.js"], ".", "/alt/b", options);
             assert.equal(exitCode, 0);
             _fsutil.writeFileSync = function(file, data) {
                 if(file.match("aggregated_min-hc") !== null){
+                    console.log(file, data.match("https://s3-us-west-2.amazonaws.com/vistacore-testing-bucket/dir/aggregated_min.js-") !== null );
                     assert.isTrue(data.match("https://s3-us-west-2.amazonaws.com/vistacore-testing-bucket/dir/aggregated_min.js-") !== null );
                 }
             };
