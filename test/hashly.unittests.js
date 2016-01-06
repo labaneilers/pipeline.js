@@ -275,7 +275,6 @@ describe("hashly", function() {
                 }
             };
             hashly.__set__("fsutil", _fsutil);
-            console.log("test");
             var exitCode = hashly.processFiles(["./test/fixtures/aggregated_min.js"], ".", "/alt/b", options);
             assert.equal(exitCode, 0);
             _fsutil.writeFileSync = function(file, data) {
